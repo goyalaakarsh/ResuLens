@@ -1,0 +1,231 @@
+{
+    "Software Developer": [
+        "Python", "Java", "C++", "C#", "JavaScript", "TypeScript", "Git", "Django", "Flask", "REST API",
+        "GraphQL", "Spring Boot", "Ruby on Rails", "Microservices", "CI/CD", "Docker", "Kubernetes", "AWS", "Azure", "GCP",
+        "Node.js", "Express.js", "Serverless Architecture", "API Design", "Design Patterns", "Unit Testing", "Integration Testing",
+        "Security Best Practices", "Scalability", "Code Review", "Agile Methodologies"
+    ],
+    "Data Analyst": [
+        "SQL", "Excel", "Python", "Pandas", "NumPy", "Data Visualization", "Tableau", "Power BI", "R", "Data Cleaning",
+        "ETL Processes", "Big Data", "Hadoop", "Spark", "Jupyter Notebooks", "Statistical Analysis", "Data Warehousing",
+        "Predictive Modeling", "Data Mining", "Business Intelligence", "Data Governance", "Database Management", "Reporting"
+    ],
+    "System Engineer": [
+        "Linux", "Windows Server", "Networking", "Cloud", "Scripting", "Automation", "Ansible", "Puppet", "Chef",
+        "Docker", "Kubernetes", "AWS", "Azure", "GCP", "Virtualization", "Vagrant", "Infrastructure as Code", "System Monitoring",
+        "Load Balancing", "Backup Solutions", "High Availability", "Disaster Recovery", "Security Compliance", "Performance Tuning"
+    ],
+    "Machine Learning Engineer": [
+        "Python", "TensorFlow", "PyTorch", "Scikit-learn", "ML Algorithms", "Data Preprocessing", "Natural Language Processing",
+        "Computer Vision", "Deep Learning", "Keras", "Reinforcement Learning", "Model Deployment", "MLOps", "Hyperparameter Tuning",
+        "Feature Engineering", "Dimensionality Reduction", "Ensemble Methods", "Time Series Analysis", "Model Evaluation", "Data Augmentation"
+    ],
+    "DevOps Engineer": [
+        "CI/CD", "Docker", "Kubernetes", "Jenkins", "GitLab CI", "Terraform", "AWS", "Azure", "GCP", "Linux", "Scripting",
+        "Monitoring", "Logging", "Infrastructure as Code", "Configuration Management", "Automation", "Continuous Monitoring",
+        "Release Management", "DevOps Practices", "Container Orchestration", "Build Automation", "Deployment Pipelines"
+    ],
+    "Frontend Developer": [
+        "JavaScript", "TypeScript", "HTML", "CSS", "React.js", "Angular", "Vue.js", "Responsive Design", "Webpack", "Babel",
+        "State Management", "REST API", "GraphQL", "UI/UX Design", "Performance Optimization", "Cross-Browser Compatibility",
+        "Sass", "Less", "Bootstrap", "Material Design", "Progressive Web Apps (PWAs)", "Web Accessibility", "Front-End Frameworks"
+    ],
+    "Backend Developer": [
+        "Python", "Java", "C#", "Ruby", "Node.js", "Express.js", "Spring Boot", "Django", "Flask", "REST API", "GraphQL",
+        "Database Design", "SQL", "NoSQL", "Caching", "Microservices", "Serverless Architecture", "API Design",
+        "Authentication & Authorization", "Session Management", "Scalable Architecture", "Performance Optimization", "Message Queues"
+    ],
+    "Database Administrator": [
+        "SQL", "NoSQL", "Database Design", "Performance Tuning", "Backup and Recovery", "Replication", "Sharding",
+        "Database Security", "Oracle", "MySQL", "PostgreSQL", "MongoDB", "Redis", "Cassandra", "Database Migration",
+        "Data Integrity", "SQL Query Optimization", "Schema Design", "Database Clustering", "Data Warehousing"
+    ],
+    "Cybersecurity Specialist": [
+        "Network Security", "Ethical Hacking", "Penetration Testing", "Security Information and Event Management (SIEM)",
+        "Firewalls", "Intrusion Detection Systems (IDS)", "Cryptography", "Vulnerability Assessment", "Incident Response",
+        "Compliance", "Risk Management", "Security Auditing", "Threat Intelligence", "Malware Analysis", "Security Protocols",
+        "Access Control", "Security Policies", "Security Operations Center (SOC)"
+    ],
+    "Cloud Engineer": [
+        "AWS", "Azure", "GCP", "Cloud Architecture", "Serverless Computing", "Containers", "Docker", "Kubernetes",
+        "Cloud Security", "Cost Optimization", "Cloud Migration", "Infrastructure as Code", "Terraform", "CI/CD",
+        "Cloud Storage Solutions", "Cloud Networking", "Cloud Service Management", "Auto-Scaling", "Disaster Recovery"
+    ],
+    "Mobile Developer": [
+        "Swift", "Kotlin", "Java", "Flutter", "React Native", "Xamarin", "Android Development", "iOS Development",
+        "UI/UX Design", "Performance Optimization", "APIs", "App Store Guidelines", "Mobile App Deployment",
+        "Cross-Platform Development", "Mobile Security", "App Monetization", "Push Notifications", "Local Storage", "User Authentication"
+    ],
+    "UI/UX Designer": [
+        "Figma", "Adobe XD", "Sketch", "Wireframing", "Prototyping", "User Research", "Usability Testing", "Responsive Design",
+        "Interaction Design", "Information Architecture", "Visual Design", "Design Systems", "User Personas", "Accessibility",
+        "Journey Mapping", "A/B Testing", "User Flows", "High-Fidelity Mockups", "Design Thinking", "Brand Identity"
+    ],
+    "Game Developer": [
+        "Unity", "Unreal Engine", "C#", "C++", "Game Design", "3D Modeling", "Animation", "Physics Simulation",
+        "AI for Games", "VR/AR Development", "Multiplayer Networking", "Game Optimization", "Shader Programming",
+        "Gameplay Mechanics", "Game Monetization", "Level Design", "Character Design", "User Interface Design", "Storytelling"
+    ],
+    "Blockchain Developer": [
+        "Solidity", "Ethereum", "Smart Contracts", "Blockchain Architecture", "Cryptography", "Decentralized Applications (DApps)",
+        "Web3.js", "IPFS", "Hyperledger", "Consensus Algorithms", "Tokenization", "Blockchain Security", "Cryptographic Algorithms",
+        "Decentralized Finance (DeFi)", "Blockchain Governance", "Ethereum Virtual Machine (EVM)", "Chainlink", "NFTs"
+    ],
+    "IoT Engineer": [
+        "Embedded Systems", "C", "C++", "IoT Protocols", "MQTT", "CoAP", "Sensors", "Actuators", "IoT Security",
+        "Data Acquisition", "Cloud Integration", "Edge Computing", "IoT Platforms", "Communication Protocols",
+        "Firmware Development", "Real-Time Operating Systems (RTOS)", "Wireless Communication", "IoT Device Management"
+    ],
+    "AI Researcher": [
+        "Python", "Machine Learning", "Deep Learning", "Natural Language Processing", "Computer Vision", "Reinforcement Learning",
+        "AI Ethics", "Research Methodology", "Statistical Analysis", "Algorithm Development", "Scientific Computing",
+        "Data Mining", "Big Data Analysis", "Model Interpretation", "Research Publication", "Experimental Design", "Theoretical Analysis"
+    ],
+    "IT Project Manager": [
+        "Project Planning", "Agile Methodologies", "Scrum", "Kanban", "Risk Management", "Stakeholder Management",
+        "Budgeting", "Scheduling", "Resource Allocation", "Team Leadership", "Change Management", "Quality Assurance",
+        "Project Documentation", "Performance Monitoring", "Client Communication", "Project Lifecycle Management"
+    ],
+    "Systems Architect": [
+        "System Design", "Architecture Patterns", "High Availability", "Scalability", "Performance Optimization", "Technical Documentation",
+        "Microservices Architecture", "Service-Oriented Architecture (SOA)", "Cloud Architecture", "Integration Strategies",
+        "Security Architecture", "Enterprise Architecture", "System Integration", "Legacy System Modernization", "Infrastructure Planning"
+    ],
+    "Network Engineer": [
+        "Network Design", "Routing and Switching", "Firewall Configuration", "VPNs", "Network Security", "Load Balancers",
+        "Network Monitoring", "Wireless Technologies", "Network Troubleshooting", "Subnetting", "IP Addressing", "Network Protocols",
+        "QoS", "Network Performance Tuning", "Network Automation", "Network Documentation"
+    ],
+    "DevSecOps Engineer": [
+        "Security Integration", "CI/CD Security", "Vulnerability Scanning", "Secure Coding Practices", "Compliance Automation",
+        "Incident Response", "Threat Modeling", "Security Auditing", "Penetration Testing", "Security Monitoring",
+        "Infrastructure Security", "Secrets Management", "Container Security", "Security Policies", "Risk Assessment"
+    ],
+    "Site Reliability Engineer (SRE)": [
+        "Reliability Engineering", "Incident Management", "Monitoring", "Alerting", "Capacity Planning", "Service Level Objectives (SLOs)",
+        "Service Level Agreements (SLAs)", "Incident Response", "Disaster Recovery", "Performance Tuning", "Automation",
+        "Fault Tolerance", "Root Cause Analysis", "System Scaling", "Change Management", "Operational Metrics"
+    ],
+    
+    "Full Stack Web Developer": [
+        "JavaScript", "TypeScript", "HTML", "CSS", "React.js", "Angular", "Vue.js", "Node.js", "Express.js", "MongoDB",
+        "MySQL", "PostgreSQL", "REST API", "GraphQL", "Docker", "Kubernetes", "CI/CD", "Git", "Webpack", "Babel",
+        "Authentication & Authorization", "Responsive Design", "State Management", "Serverless Computing", "API Integration",
+        "Testing Frameworks", "Agile Methodologies", "Version Control"
+    ],
+    "Embedded Systems Engineer": [
+        "C", "C++", "Embedded C", "RTOS", "Microcontrollers", "ARM Cortex", "Peripheral Interfacing", "UART", "SPI", "I2C",
+        "Firmware Development", "Debugging Tools", "IoT Protocols", "Low-Level Programming", "Sensor Integration", "Embedded Linux",
+        "Real-Time Operating Systems (RTOS)", "Power Management", "Embedded System Design", "Prototyping", "Embedded Security"
+    ],
+    "IT Support Specialist": [
+        "Technical Support", "Troubleshooting", "Customer Service", "Hardware Repair", "Software Installation", "Network Configuration",
+        "Operating Systems", "Remote Assistance", "ITIL Framework", "Help Desk Software", "Incident Management", "Ticketing Systems",
+        "System Upgrades", "User Training", "Documentation", "Access Control", "Password Management", "Backup Solutions",
+        "Virus Removal", "System Monitoring", "Technical Documentation"
+    ],
+    "Digital Marketing Specialist": [
+        "SEO", "SEM", "Content Marketing", "Social Media Marketing", "Google Analytics", "PPC Advertising", "Email Marketing",
+        "Conversion Rate Optimization", "A/B Testing", "Keyword Research", "Content Strategy", "Influencer Marketing", "Marketing Automation",
+        "Analytics Tools", "Customer Segmentation", "Campaign Management", "Performance Metrics", "Market Research", "Brand Management",
+        "Digital Advertising", "Data Analysis"
+    ],
+    "Product Manager": [
+        "Product Development", "Market Research", "Product Lifecycle Management", "Agile Methodologies", "Roadmap Planning",
+        "User Stories", "Backlog Management", "Stakeholder Communication", "Feature Prioritization", "Product Strategy", "Go-To-Market Strategy",
+        "Competitive Analysis", "Requirements Gathering", "KPI Tracking", "Customer Feedback", "Product Testing", "Market Trends",
+        "Budget Management", "Project Management", "Cross-Functional Team Leadership"
+    ],
+    "Game Designer": [
+        "Game Mechanics", "Level Design", "Storytelling", "Gameplay Balancing", "User Experience Design", "Game Prototyping",
+        "Narrative Design", "Character Development", "Quest Design", "User Interface Design", "Game Systems Design", "Feedback Iteration",
+        "Player Psychology", "Game Economy", "Monetization Strategies", "Playtesting", "Game Asset Creation", "Audio Design",
+        "Animation Design", "Scriptwriting", "Gameplay Testing"
+    ],
+    "Technical Writer": [
+        "Technical Documentation", "Content Creation", "User Manuals", "API Documentation", "Technical Guides", "Editing & Proofreading",
+        "Information Design", "Markdown", "XML", "Content Management Systems (CMS)", "Graphic Design", "Research Skills", "Technical Editing",
+        "Version Control", "Documenting Processes", "Instructional Design", "Software Documentation", "End-User Documentation",
+        "Usability Testing", "Documentation Standards", "Communication Skills", "Project Management"
+    ],
+    "AI Engineer": [
+        "Artificial Intelligence", "Machine Learning", "Deep Learning", "Python", "TensorFlow", "PyTorch", "Natural Language Processing",
+        "Computer Vision", "AI Algorithms", "Model Training", "Data Analysis", "AI Model Deployment", "Reinforcement Learning", "Keras",
+        "Model Optimization", "Data Annotation", "Feature Engineering", "Algorithm Development", "AI Ethics", "Big Data", "Scalable AI Solutions"
+    ],
+    "Software Architect": [
+        "System Architecture", "Design Patterns", "Enterprise Architecture", "Scalability", "Microservices Architecture", "Service-Oriented Architecture",
+        "Cloud Solutions", "API Design", "Technical Debt Management", "Architectural Documentation", "Performance Tuning", "Security Architecture",
+        "High Availability", "Disaster Recovery", "Technical Leadership", "Architecture Reviews", "Stakeholder Communication", "System Integration",
+        "Legacy Systems", "Infrastructure Planning", "Technology Evaluation"
+    ],
+    "UX Researcher": [
+        "User Research", "Qualitative Research", "Quantitative Research", "Usability Testing", "User Interviews", "Surveys",
+        "Persona Development", "Journey Mapping", "Ethnographic Studies", "A/B Testing", "Data Analysis", "Research Methodologies",
+        "User Behavior Analysis", "Heuristic Evaluation", "Competitor Analysis", "UX Metrics", "Contextual Inquiry", "Research Documentation",
+        "Feedback Analysis", "Prototyping", "Research Reporting"
+    ],
+    "IT Consultant": [
+        "IT Strategy", "Business Analysis", "Technology Assessment", "System Implementation", "Project Management", "Risk Management",
+        "IT Infrastructure", "Change Management", "Solution Design", "Vendor Management", "Process Improvement", "Digital Transformation",
+        "Cost-Benefit Analysis", "Technology Integration", "Client Relationship Management", "IT Governance", "Compliance", "Data Security",
+        "Strategic Planning", "Technology Roadmaps", "Consulting Best Practices"
+    ],
+    "Robotics Engineer": [
+        "Robotic Systems Design", "Automation", "Embedded Systems", "C/C++", "Robot Operating System (ROS)", "Sensor Integration",
+        "Actuator Control", "Path Planning", "Robotic Manipulation", "Machine Vision", "Control Systems", "Prototyping", "Kinematics",
+        "Dynamics", "Robot Programming", "Simulation Tools", "Embedded Programming", "Robotic Arm Control", "Safety Systems",
+        "Robot Calibration", "Performance Optimization"
+    ],
+    "Business Intelligence Analyst": [
+        "Data Analysis", "SQL", "Data Visualization", "BI Tools", "Tableau", "Power BI", "Data Warehousing", "ETL Processes",
+        "Data Mining", "Predictive Analytics", "Data Modeling", "Business Metrics", "KPI Tracking", "Reporting", "Dashboard Development",
+        "Business Strategy", "Market Analysis", "Customer Insights", "Data Integration", "Business Requirements Analysis", "Data Governance"
+    ],
+    "Network Administrator": [
+        "Network Configuration", "Routing and Switching", "Firewall Management", "VPN Setup", "Network Security", "Network Monitoring",
+        "Troubleshooting", "IP Addressing", "Network Protocols", "Wireless Networking", "Network Performance", "Subnetting",
+        "Network Documentation", "Load Balancing", "Network Management Tools", "Server Configuration", "Network Automation", "Backup Solutions",
+        "Data Backup", "Network Access Control", "Network Segmentation"
+    ],
+    "IT Compliance Specialist": [
+        "Compliance Management", "Regulatory Requirements", "Data Privacy", "Risk Assessment", "Audit Preparation", "Policy Development",
+        "Internal Controls", "Compliance Reporting", "IT Governance", "Information Security", "Regulatory Standards", "Incident Management",
+        "Documentation", "Data Protection", "Security Compliance", "Ethical Hacking", "Audit Trails", "Compliance Training",
+        "Regulatory Frameworks", "Risk Mitigation"
+    ],
+    "System Analyst": [
+        "Requirements Gathering", "System Design", "Business Analysis", "Process Improvement", "Technical Specifications",
+        "System Integration", "Data Analysis", "Project Management", "User Acceptance Testing (UAT)", "System Documentation",
+        "Stakeholder Communication", "Solution Design", "Feasibility Studies", "Gap Analysis", "Business Process Modeling",
+        "Technical Support", "Problem Solving", "Change Management", "System Upgrades", "Technology Assessment"
+    ],
+    "Digital Transformation Specialist": [
+        "Digital Strategy", "Change Management", "Technology Implementation", "Process Automation", "Data Analytics", "Customer Experience",
+        "Business Process Reengineering", "Cloud Computing", "IT Infrastructure", "Innovation Management", "Agile Methodologies",
+        "Technology Trends", "Digital Marketing", "Operational Efficiency", "User Adoption", "Digital Roadmaps", "Project Management",
+        "Technology Integration", "Business Analytics", "Digital Tools"
+    ],
+    "Content Strategist": [
+        "Content Planning", "Content Creation", "Editorial Strategy", "SEO", "Content Management Systems (CMS)", "User Experience",
+        "Content Marketing", "Brand Voice", "Content Distribution", "Analytics", "Content Optimization", "Social Media Strategy",
+        "Editorial Calendars", "Content Governance", "Audience Research", "Copywriting", "Content Audits", "Cross-Functional Collaboration",
+        "Content Metrics", "Strategy Development"
+    ],
+    "Salesforce Developer": [
+        "Salesforce Platform", "Apex", "Visualforce", "Lightning Web Components", "SOQL", "Salesforce Integration", "Salesforce APIs",
+        "Salesforce Configuration", "Data Management", "Custom Object Development", "Workflow Automation", "Process Builder", "Reports & Dashboards",
+        "AppExchange", "Salesforce Security", "User Management", "Salesforce Deployment", "Salesforce Best Practices", "Mobile Salesforce",
+        "Lightning Components", "Salesforce Communities"
+    ],
+    "Virtual Reality Developer": [
+        "Unity", "Unreal Engine", "C#", "C++", "VR SDKs", "3D Modeling", "Immersive Experiences", "VR Design", "Interaction Design",
+        "Game Engines", "Spatial Audio", "VR Optimization", "User Interface Design", "VR Prototyping", "Augmented Reality", "Mixed Reality",
+        "Virtual Environments", "User Experience", "Simulation", "VR Testing", "Cross-Platform VR Development"
+    ],
+    "Data Scientist": [
+        "Python", "R", "Statistical Analysis", "Machine Learning", "Data Visualization", "Big Data", "Data Mining", "Predictive Modeling",
+        "Data Cleaning", "Feature Engineering", "Data Analysis", "Exploratory Data Analysis (EDA)", "SQL", "Deep Learning", "Data Wrangling",
+        "Model Evaluation", "Big Data Technologies", "Data Pipelines", "Quantitative Analysis", "Programming"
+    ]   
+}
