@@ -37,5 +37,5 @@ This project is a tool for analyzing resumes by comparing them with job descript
 4. **Run the Application**  
    You can run the app by executing the `app.py` file:
    ```bash
-   python app.py
+   python -m streamlit run app.py
    ```
