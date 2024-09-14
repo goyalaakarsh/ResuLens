@@ -18,8 +18,8 @@ This project is a tool for analyzing resumes by comparing them with job descript
 1. **Clone the Repository**  
    Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/yourusername/your-repository.git
-   cd your-repository
+   git clone https://github.com/goyalaakarsh/Resume-ATS-Analyzer
+   cd Resume-ATS-Analyzer
    ```
 
 2. **Install Dependencies**  
