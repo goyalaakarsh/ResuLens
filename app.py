@@ -19,6 +19,9 @@ from textstat import flesch_kincaid_grade
 from google.cloud import aiplatform
 from dotenv import load_dotenv
 import google.generativeai as genai
+import pymupdf
+import statistics
+
 
 load_dotenv()
 genai.configure(api_key=os.environ["GOOGLE_GEMINI_KEY"])
@@ -243,8 +246,7 @@ def extract_achievements(text):
     return achievements
 
 ## ATS Score calculator
-def calculate_ats_score(resume_text, job_description, resume_skills, job_skills):
-
+def calculate_ats_score(resume_text, job_description, resume_skills, job_skills, pdf_path):
     keyword_match = len(set(resume_skills).intersection(
         set(job_skills))) / len(job_skills) if job_skills else 0
 
@@ -253,12 +255,15 @@ def calculate_ats_score(resume_text, job_description, resume_skills, job_skills)
     achievement_score = min(len(achievements) / 3, 1)
     format_score = 1 if all(keyword in resume_text.lower() for keyword in [
                             "experience", "education", "skills"]) else 0
+    evaluation_results = evaluate_pdf_formatting(pdf_path)
+    formatting_score = calculate_formatting_score(evaluation_results) / 100 
 
     scores = {
-        "Keyword Matching (35%)": keyword_match * 35,
-        "Content Similarity (30%)": content_similarity * 30,
-        "Achievements (20%)": achievement_score * 20,
-        "Format and Structure (15%)": format_score * 15
+        "Keyword Matching (30%)": keyword_match * 30,
+        "Content Similarity (25%)": content_similarity * 25,
+        "Achievements (15%)": achievement_score * 15,
+        "Basic Format and Structure (10%)": format_score * 10,
+        "PDF Formatting (20%)": formatting_score * 20
     }
 
     ats_score = sum(scores.values())
@@ -403,8 +408,193 @@ def auto_generate_cover_letter(resume_text, job_description):
     
     return cover_letter
 
+## Evaluating PDF formattign
+def evaluate_pdf_formatting(pdf_path):
+    doc = pymupdf.open(pdf_path)
+    
+    font_info = {}
+    margins = []
+    line_spacings = []
+    text_alignments = []
+    page_numbers = []
+    total_pages = len(doc)
+    
+    for page_num in range(total_pages):
+        page = doc[page_num]
+        blocks = page.get_text("dict")["blocks"]
+        
+        page_fonts = []
+        page_margins = {"left": [], "right": [], "top": [], "bottom": []}
+        page_line_spacings = []
+        page_alignments = []
+        
+        for block in blocks:
+            if block["type"] == 0:  # Text block
+                for line in block.get("lines", []):
+                    for span in line.get("spans", []):
+                        font = span["font"]
+                        font_size = span["size"]
+                        text = span["text"]
+                        
+                        # Update font_info dictionary
+                        if font not in font_info:
+                            font_info[font] = {"size": set(), "count": 0}
+                        font_info[font]["count"] += 1
+                        font_info[font]["size"].add(font_size)
+                        
+                        page_alignments.append(determine_text_alignment(span["origin"][0], page.rect.width))
+                    
+                    # Line spacing
+                    if len(line["spans"]) > 0:
+                        page_line_spacings.append(line["spans"][0]["origin"][1] - line["spans"][-1]["origin"][1])
+                
+                # Margins
+                bbox = pymupdf.Rect(block["bbox"])
+                page_margins["left"].append(bbox.x0)
+                page_margins["right"].append(page.rect.width - bbox.x1)
+                page_margins["top"].append(bbox.y0)
+                page_margins["bottom"].append(page.rect.height - bbox.y1)
+        
+        margins.append(page_margins)
+        line_spacings.extend(page_line_spacings)
+        text_alignments.extend(page_alignments)
+        
+        # Check for page numbers
+        page_numbers.append(detect_page_number(page, page_num + 1, total_pages))
+    
+    return {
+        "font_consistency": evaluate_font_consistency(font_info),
+        "margin_consistency": evaluate_margin_consistency(margins),
+        "line_spacing_consistency": evaluate_line_spacing_consistency(line_spacings),
+        "text_alignment_consistency": evaluate_text_alignment_consistency(text_alignments),
+        "page_number_consistency": evaluate_page_number_consistency(page_numbers, total_pages)
+    }
+
+def evaluate_font_consistency(font_info):
+    font_issues = []
+    for font, data in font_info.items():
+        if len(data["size"]) > 3:
+            font_issues.append(f"Inconsistent font sizes found for {font}. Sizes: {data['size']}")
+    
+    return "Consistent" if not font_issues else "\n".join(font_issues)
+
+def evaluate_margin_consistency(margins):
+    left_margins = [min(page["left"]) for page in margins]
+    right_margins = [min(page["right"]) for page in margins]
+    top_margins = [min(page["top"]) for page in margins]
+    bottom_margins = [min(page["bottom"]) for page in margins]
+    
+    margin_consistency = all(
+        abs(left_margins[0] - margin) < 5 for margin in left_margins
+    ) and all(
+        abs(right_margins[0] - margin) < 5 for margin in right_margins
+    ) and all(
+        abs(top_margins[0] - margin) < 5 for margin in top_margins
+    ) and all(
+        abs(bottom_margins[0] - margin) < 5 for margin in bottom_margins
+    )
+    
+    if margin_consistency:
+        return "Margins are consistent across all pages"
+    else:
+        return "Inconsistent margins detected across pages"
+
+def evaluate_line_spacing_consistency(line_spacings):
+    if not line_spacings:
+        return "No line spacing data available"
+    
+    avg_spacing = statistics.mean(line_spacings)
+    std_dev = statistics.stdev(line_spacings) if len(line_spacings) > 1 else 0
+    
+    if std_dev / avg_spacing < 0.1:
+        return f"Consistent line spacing (mean: {avg_spacing:.2f}, std dev: {std_dev:.2f})"
+    else:
+        return f"Inconsistent line spacing detected (mean: {avg_spacing:.2f}, std dev: {std_dev:.2f})"
+
+def evaluate_text_alignment_consistency(alignments):
+    alignment_counts = Counter(alignments)
+    total = sum(alignment_counts.values())
+    
+    if len(alignment_counts) == 1:
+        return f"Consistent text alignment: {alignments[0]}"
+    else:
+        return "Mixed text alignments detected: " + ", ".join(f"{align}: {count/total:.1%}" for align, count in alignment_counts.items())
+
+def evaluate_page_number_consistency(page_numbers, total_pages):
+    if total_pages == 1:
+        return "Single-page document, page numbering not applicable (best case)"
+    
+    numbered_pages = sum(page_numbers)
+    numbering_percentage = (numbered_pages / total_pages) * 100
+
+    if numbered_pages == total_pages:
+        return f"Consistent page numbering detected on all {total_pages} pages"
+    elif numbered_pages == 0:
+        return f"No page numbers detected in {total_pages}-page document (worst case)"
+    else:
+        return f"Inconsistent page numbering: {numbered_pages} out of {total_pages} pages numbered ({numbering_percentage:.1f}%)"
+
+def determine_text_alignment(x_position, page_width):
+    left_margin = 50
+    right_margin = page_width - 50
+    
+    if x_position < left_margin:
+        return "left"
+    elif x_position > right_margin:
+        return "right"
+    else:
+        return "center"
+
+def detect_page_number(page, expected_number, total_pages):
+    text = page.get_text()
+    lines = text.split('\n')
+    
+    potential_numbers = [lines[0].strip(), lines[-1].strip()]
+    
+    for num in potential_numbers:
+        if num.isdigit() and int(num) == expected_number:
+            return True
+        elif num.lower() in ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x']:
+            return True
+    
+    return False
+
+def calculate_formatting_score(evaluation_results):
+    score = 0
+    total_weight = 0
+
+    # Font consistency (30% weight)
+    if evaluation_results["font_consistency"] == "Consistent":
+        score += 30
+    total_weight += 30
+
+    # Margin consistency (25% weight)
+    if evaluation_results["margin_consistency"] == "Margins are consistent across all pages":
+        score += 25
+    total_weight += 25
+
+    # Line spacing consistency (20% weight)
+    if "Consistent line spacing" in evaluation_results["line_spacing_consistency"]:
+        score += 20
+    total_weight += 20
+
+    # Text alignment consistency (15% weight)
+    if "Consistent text alignment" in evaluation_results["text_alignment_consistency"]:
+        score += 15
+    total_weight += 15
+
+    # Page number consistency (10% weight)
+    if "Consistent page numbering" in evaluation_results["page_number_consistency"]:
+        score += 10
+    elif "Single-page document" in evaluation_results["page_number_consistency"]:
+        score += 10 
+    total_weight += 10
+
+    final_score = (score / total_weight) * 100 if total_weight > 0 else 0
+    return final_score
+
 ## Displaying all the results 
-def display_job_match_results(ats_score, detailed_scores, resume_analysis, job_analysis, resume_text, job_description):
+def display_job_match_results(ats_score, detailed_scores, resume_analysis, job_analysis, resume_text, job_description, pdf_analysis):
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("⚡ ATS Score", f"{ats_score:.2f}%")
@@ -414,6 +604,8 @@ def display_job_match_results(ats_score, detailed_scores, resume_analysis, job_a
         st.metric("🚩 Missing Skills", len(set(job_analysis["skills"]) - set(resume_analysis["skills"])))
 
     st.progress(ats_score / 100)
+    
+    st.write("---")
 
     st.write("### 🧠 Analysis")
     col1, col2, col3 = st.columns(3, gap="large")
@@ -439,6 +631,8 @@ def display_job_match_results(ats_score, detailed_scores, resume_analysis, job_a
         score_df.columns = ['Criteria', 'Score']
         score_df['Score'] = score_df['Score'].round(2)
         st.dataframe(score_df, use_container_width=True)
+        
+    st.write("---")
 
     st.write("### 📊 Visualizations")
     col1, col2 = st.columns(2, gap="large")
@@ -453,6 +647,8 @@ def display_job_match_results(ats_score, detailed_scores, resume_analysis, job_a
     with col2:
         fig_ats = px.bar(score_df, x='Criteria', y='Score', title='ATS Score Distribution by Criteria')
         st.plotly_chart(fig_ats, use_container_width=True)
+        
+    st.write("---")
 
     col1, col2 = st.columns(2, gap="large")
     
@@ -529,10 +725,12 @@ def main():
                 job_analysis = analyze_job_description(job_description)
 
                 ats_score, detailed_scores = calculate_ats_score(
-                    resume_text, job_description, resume_analysis["skills"], job_analysis["skills"])
+                    resume_text, job_description, resume_analysis["skills"], job_analysis["skills"], temp_file_path)
+                
+                pdf_analysis = evaluate_pdf_formatting(temp_file_path)
 
                 display_job_match_results(
-                    ats_score, detailed_scores, resume_analysis, job_analysis, resume_text, job_description)
+                    ats_score, detailed_scores, resume_analysis, job_analysis, resume_text, job_description, pdf_analysis)
         else:
             st.error("Please provide both a resume and a job description.")
     st.markdown("</div>", unsafe_allow_html=True)
