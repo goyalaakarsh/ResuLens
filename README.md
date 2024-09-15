@@ -1,7 +1,7 @@
 
 # ResuLens: Resume Parser and ATS Score Analyzer
 
-This project is a comprehensive tool designed to streamline the recruitment process by leveraging advanced resume parsing, skill extraction, and ATS (Applicant Tracking System) scoring algorithms. It aims to optimize how resumes are analyzed in comparison to specific job descriptions, enabling both applicants and recruiters to assess the strength of a resume with precision and clarity. 
+A comprehensive tool designed to streamline the recruitment process by leveraging advanced resume parsing, skill extraction, and ATS (Applicant Tracking System) scoring algorithms. It aims to optimize how resumes are analyzed in comparison to specific job descriptions, enabling both applicants and recruiters to assess the strength of a resume with precision and clarity. 
 
 Key features include an intelligent resume parser that breaks down the resume into meaningful components, extracting core skills and relevant information crucial for determining job-fit. The ATS score calculation provides an objective metric that evaluates how well the resume aligns with the job description, giving users a clear understanding of their candidacy potential.
 
