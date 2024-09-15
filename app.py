@@ -20,8 +20,9 @@ from google.cloud import aiplatform
 from dotenv import load_dotenv
 import google.generativeai as genai
 import pymupdf
+import cv2
+import numpy as np
 import statistics
-
 
 load_dotenv()
 genai.configure(api_key=os.environ["GOOGLE_GEMINI_KEY"])
@@ -69,17 +70,17 @@ def extract_text_from_pdf(file_path):
         st.error(f"Error while extracting text: {e}")
         return None
 
-def extract_resume_text(file_path):
-    try:
-        if file_path.lower().endswith('.pdf'):
-            text = extract_text(file_path)
-        else:
-            image = Image.open(file_path)
-            text = pytesseract.image_to_string(image)
-        return text
-    except Exception as e:
-        st.error(f"Error while extracting text: {e}")
-        return None
+# def extract_resume_text(file_path):
+#     try:
+#         if file_path.lower().endswith('.pdf'):
+#             text = extract_text(file_path)
+#         else:
+#             image = Image.open(file_path)
+#             text = pytesseract.image_to_string(image)
+#         return text
+#     except Exception as e:
+#         st.error(f"Error while extracting text: {e}")
+#         return None
 
 def extract_text_from_image(image_path):
     api_key = 'K83939171788957'
@@ -408,6 +409,58 @@ def auto_generate_cover_letter(resume_text, job_description):
     
     return cover_letter
 
+def evaluate_image_formatting(image_path):
+    image = Image.open(image_path)
+    
+    text_data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT)
+    
+    font_info = {}
+    margins = []
+    line_spacings = []
+    text_alignments = []
+    total_boxes = len(text_data['text'])
+    
+    image_width, image_height = image.size
+    previous_bottom = 0
+    
+    for i in range(total_boxes):
+        text = text_data['text'][i].strip()
+        if text:
+            x, y, width, height = text_data['left'][i], text_data['top'][i], text_data['width'][i], text_data['height'][i]
+            
+            font = 'default_font'  # Tesseract does not provide font info directly; placeholders can be used
+            font_size = height
+            
+            # Update font_info dictionary
+            if font not in font_info:
+                font_info[font] = {"size": set(), "count": 0}
+            font_info[font]["count"] += 1
+            font_info[font]["size"].add(font_size)
+            
+            # Determine text alignment
+            text_alignments.append(determine_text_alignment(x, image_width))
+            
+            # Line spacing
+            if previous_bottom != 0:
+                line_spacings.append(y - previous_bottom)
+            previous_bottom = y + height
+            
+            # Margins
+            margins.append({
+                "left": x,
+                "right": image_width - (x + width),
+                "top": y,
+                "bottom": image_height - (y + height)
+            })
+    
+    return {
+        "font_consistency": evaluate_font_consistency(font_info),
+        "margin_consistency": evaluate_margin_consistency(margins),
+        "line_spacing_consistency": evaluate_line_spacing_consistency(line_spacings),
+        "text_alignment_consistency": evaluate_text_alignment_consistency(text_alignments),
+        "page_number_consistency": "N/A"  # Page numbers are not relevant for single images
+    }
+
 ## Evaluating PDF formattign
 def evaluate_pdf_formatting(pdf_path):
     doc = pymupdf.open(pdf_path)
@@ -593,6 +646,26 @@ def calculate_formatting_score(evaluation_results):
     final_score = (score / total_weight) * 100 if total_weight > 0 else 0
     return final_score
 
+def resume_text_enhancer(resume_text):
+    prompt = f"""
+    You are a professional resume editor. Your task is to enhance the given resume text while preserving its original sections. Improve the formatting, grammar, and clarity of the resume. Make sure to:
+
+    1. Enhance the clarity and impact of each bullet point.
+    2. Ensure that the language is professional and polished.
+    3. Improve the overall flow and readability of the resume.
+    4. Maintain the original sections without adding new section.
+    5. Format the text in a way that highlights the key achievements and skills effectively.
+
+    Here is the resume text that needs enhancement:
+
+    {resume_text}
+
+    Provide the improved resume text below:
+    """
+    
+    response = model.generate_content(prompt).text
+    return response
+
 ## Displaying all the results 
 def display_job_match_results(ats_score, detailed_scores, resume_analysis, job_analysis, resume_text, job_description, pdf_analysis):
     col1, col2, col3 = st.columns(3)
@@ -661,6 +734,10 @@ def display_job_match_results(ats_score, detailed_scores, resume_analysis, job_a
         st.write("### ✨ AI Generated Personalized Cover Letter")
         cover_letter_text = auto_generate_cover_letter(resume_text, job_description)
         st.info(cover_letter_text)
+        
+    st.write("---")
+    st.write(" ### AI Enhanced Resume Content")
+    st.success(resume_text_enhancer(resume_text))
 
 def main():
     st.title("Resume ATS Analyzer 📊")
